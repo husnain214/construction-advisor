@@ -7,8 +7,13 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    fontFamily: {
-      'primary': 'var(--font-poppins)',
+    extend: {
+      fontFamily: {
+        'primary': ['var(--font-poppins)', 'sans-serif'],
+      },
+      colors: {
+        'primary': '#EE6338',
+      }
     }
   },
   plugins: [],

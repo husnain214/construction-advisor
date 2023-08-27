@@ -30,7 +30,7 @@ const LoginForm = () => {
 
   return (
     <main className="grid place-items-center bg-slate-50">
-      <div className="p-7 shadow-md bg-white rounded-2xl mx-auto grid gap-5 w-[90vw] max-w-[30rem]">
+      <div className="p-7 shadow-md bg-white rounded-xl mx-auto grid gap-5 w-[90vw] max-w-[30rem]">
         <header>
           <h1 className="text-3xl font-bold text-center">Welcome back!</h1>
         </header>
@@ -40,7 +40,7 @@ const LoginForm = () => {
             <input
               {...register('email')}
               aria-invalid={errors.email ? 'true' : 'false'}
-              className="border rounded-md px-5 py-3"
+              className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             />
             {errors.email && (
               <span role="alert" className="text-red-500 text-sm">
@@ -54,7 +54,7 @@ const LoginForm = () => {
               type="password"
               {...register('password')}
               aria-invalid={errors.password ? 'true' : 'false'}
-              className="border rounded-md px-5 py-3"
+              className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             />
             {errors.password && (
               <span role="alert" className="text-red-500 text-sm">
@@ -78,7 +78,7 @@ const LoginForm = () => {
           </div>
           <button
             type="submit"
-            className="bg-red-500 text-white rounded-md py-3"
+            className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3"
           >
             Submit
           </button>
@@ -86,7 +86,10 @@ const LoginForm = () => {
         <footer>
           <p className="text-center">
             Dont have an account?
-            <Link className="text-red-500 ml-2 underline" href={'/signup'}>
+            <Link
+              className="text-primary hover:text-red-400 ml-2 underline"
+              href={'/signup'}
+            >
               Create one now!
             </Link>
           </p>
