@@ -10,12 +10,12 @@ type FormData = {
   password: string;
 };
 
-const LoginForm = () => {
-  const schema: ZodType<FormData> = z.object({
-    email: z.string().email(),
-    password: z.string().min(5).max(20),
-  });
+const schema: ZodType<FormData> = z.object({
+  email: z.string().nonempty().email(),
+  password: z.string().nonempty().min(5).max(20),
+});
 
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
@@ -34,7 +34,12 @@ const LoginForm = () => {
         <header>
           <h1 className="text-3xl font-bold text-center">Welcome back!</h1>
         </header>
-        <form className="grid gap-5" action="" onSubmit={handleSubmit(submit)}>
+        <form
+          className="grid gap-5"
+          action=""
+          onSubmit={handleSubmit(submit)}
+          method="POST"
+        >
           <label htmlFor="email">Email:</label>
           <div className="grid gap-1">
             <input
