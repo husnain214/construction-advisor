@@ -8,6 +8,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signupForm } from '@/constants';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
+import { styles } from '@/styles';
+import { Oval } from 'react-loader-spinner';
 
 type FormData = {
   profileAvatar: FileList;
@@ -23,7 +25,9 @@ type FormData = {
 };
 
 const schema: ZodType<FormData> = z.object({
-  profileAvatar: z.custom<FileList>(),
+  profileAvatar: z.custom<FileList>().refine((data) => data.length > 0, {
+    message: 'Profile picture is required',
+  }),
   fullname: z.string().max(30).nonempty(),
   email: z.string().email().nonempty().nonempty(),
   password: z.string().max(20).nonempty(),
@@ -31,7 +35,7 @@ const schema: ZodType<FormData> = z.object({
   phoneNumber: z.string().min(9).max(13),
   cnicNumber: z.string().min(9).max(13),
   gender: z.string().nonempty(),
-  dateOfBirth: z.coerce.date().min(new Date()),
+  dateOfBirth: z.coerce.date().max(new Date()),
   age: z.preprocess(
     (arg) => parseInt(z.string().parse(arg)),
     z.number().nonnegative().min(18),
@@ -40,6 +44,7 @@ const schema: ZodType<FormData> = z.object({
 
 const SignupForm = () => {
   const [avatar, setAvatar] = useState<string | StaticImageData>(ProfileAvatar);
+  const [submitting, setSubmitting] = useState(false);
 
   const {
     register,
@@ -50,7 +55,7 @@ const SignupForm = () => {
   });
 
   const submit = (data: FormData) => {
-    console.log('submitting...');
+    setSubmitting(true);
     console.log(data);
   };
 
@@ -87,6 +92,7 @@ const SignupForm = () => {
                 Upload photo
                 <input
                   {...register('profileAvatar', {
+                    required: 'Profile picture is required',
                     onChange: ({ target }) =>
                       setAvatar(
                         target.files
@@ -96,12 +102,15 @@ const SignupForm = () => {
                   })}
                   accept="image/*"
                   type="file"
-                  className="invisible absolute inset-0 -z-[1]"
+                  className="absolute inset-0 -z-[1]"
                 />
-                {errors.profileAvatar && (
-                  <span>{errors.profileAvatar.message}</span>
-                )}
               </label>
+
+              {errors.profileAvatar && (
+                <span role="alert" className="text-red-500 text-sm">
+                  {errors.profileAvatar.message}
+                </span>
+              )}
             </div>
 
             {signupForm.textFields.map((field, index) => (
@@ -184,8 +193,20 @@ const SignupForm = () => {
 
             <button
               type="submit"
-              className="bg-primary hover:bg-red-400 active:scale-95 transition-all text-white rounded-full py-3 px-6 col-span-12 mx-auto"
+              className={`${styles.primaryButton} col-span-12 mx-auto active:scale-95 flex justify-center items-center gap-3`}
             >
+              <Oval
+                height={20}
+                width={20}
+                color="#ffff"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={submitting}
+                ariaLabel="oval-loading"
+                secondaryColor="#EE6338"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
               Create Account
             </button>
           </form>

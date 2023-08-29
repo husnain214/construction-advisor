@@ -4,6 +4,9 @@ import { z, ZodType } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { styles } from '@/styles';
+import { useState } from 'react';
+import { Oval } from 'react-loader-spinner';
 
 type FormData = {
   email: string;
@@ -24,7 +27,10 @@ const LoginForm = () => {
     resolver: zodResolver(schema),
   });
 
+  const [submitting, setSubmitting] = useState(false);
+
   const submit = (data: FormData) => {
+    setSubmitting(true);
     console.log(data);
   };
 
@@ -83,9 +89,21 @@ const LoginForm = () => {
           </div>
           <button
             type="submit"
-            className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3"
+            className={`${styles.primaryButton} justify-self-center flex justify-center items-center gap-3`}
           >
-            Submit
+            <Oval
+              height={20}
+              width={20}
+              color="#ffff"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={submitting}
+              ariaLabel="oval-loading"
+              secondaryColor="#EE6338"
+              strokeWidth={4}
+              strokeWidthSecondary={4}
+            />
+            Login
           </button>
         </form>
         <footer>
