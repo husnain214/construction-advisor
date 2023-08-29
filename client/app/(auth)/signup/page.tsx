@@ -1,7 +1,7 @@
 'use client';
 
 import Image, { StaticImageData } from 'next/image';
-import { ProfileAvatar, UploadIcon } from '../../public';
+import { ProfileAvatar, UploadIcon } from '../../../public';
 import { z, ZodType } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
