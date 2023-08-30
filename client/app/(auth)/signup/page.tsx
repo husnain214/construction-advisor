@@ -24,23 +24,28 @@ type FormData = {
   age?: unknown;
 };
 
-const schema: ZodType<FormData> = z.object({
-  profileAvatar: z.custom<FileList>().refine((data) => data.length > 0, {
-    message: 'Profile picture is required',
-  }),
-  fullname: z.string().max(30).nonempty(),
-  email: z.string().email().nonempty().nonempty(),
-  password: z.string().max(20).nonempty(),
-  confirmPassword: z.string().max(20).nonempty(),
-  phoneNumber: z.string().min(9).max(13),
-  cnicNumber: z.string().min(9).max(13),
-  gender: z.string().nonempty(),
-  dateOfBirth: z.coerce.date().max(new Date()),
-  age: z.preprocess(
-    (arg) => parseInt(z.string().parse(arg)),
-    z.number().nonnegative().min(18),
-  ),
-});
+const schema: ZodType<FormData> = z
+  .object({
+    profileAvatar: z.custom<FileList>().refine((data) => data.length > 0, {
+      message: 'Profile picture is required',
+    }),
+    fullname: z.string().max(30).nonempty(),
+    email: z.string().email().nonempty().nonempty(),
+    password: z.string().max(20).nonempty(),
+    confirmPassword: z.string().max(20).nonempty(),
+    phoneNumber: z.string().min(9).max(13),
+    cnicNumber: z.string().min(9).max(13),
+    gender: z.string().nonempty(),
+    dateOfBirth: z.coerce.date().max(new Date()),
+    age: z.preprocess(
+      (arg) => parseInt(z.string().parse(arg)),
+      z.number().nonnegative().min(18),
+    ),
+  })
+  .refine(({ password, confirmPassword }) => password === confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  });
 
 const SignupForm = () => {
   const [avatar, setAvatar] = useState<string | StaticImageData>(ProfileAvatar);
@@ -113,7 +118,7 @@ const SignupForm = () => {
               )}
             </div>
 
-            {signupForm.textFields.map((field, index) => (
+            {signupForm.textFields.map((field) => (
               <Fragment key={field.name}>
                 <label
                   htmlFor={field.name}
@@ -125,13 +130,13 @@ const SignupForm = () => {
                 <div className="sm:col-span-9">
                   <input
                     {...register(field.name as keyof FormData)}
-                    className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary"
+                    className={`py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary ${
+                      field.type === 'number'
+                        ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                        : ''
+                    }`}
                     placeholder={field.placeholder}
-                    type={
-                      index === signupForm.textFields.length - 1
-                        ? 'number'
-                        : 'text'
-                    }
+                    type={field.type}
                     aria-invalid={
                       errors[field.name as keyof FormData] ? 'true' : 'false'
                     }
@@ -160,7 +165,7 @@ const SignupForm = () => {
                     type="radio"
                     className="shrink-0 mt-0.5 border border-gray-200 rounded-full accent-primary pointer-events-none"
                     id={radio}
-                    defaultChecked={index === 0}
+                    checked={index === 0}
                   />
 
                   <span className="text-sm text-gray-500 ml-3 dark:text-gray-400 capitalize">
@@ -193,7 +198,7 @@ const SignupForm = () => {
 
             <button
               type="submit"
-              className={`${styles.primaryButton} col-span-12 mx-auto active:scale-95 flex justify-center items-center gap-3`}
+              className={`${styles.primaryButton} col-span-12 mx-auto flex justify-center items-center gap-3`}
             >
               <Oval
                 height={20}
@@ -204,8 +209,8 @@ const SignupForm = () => {
                 visible={submitting}
                 ariaLabel="oval-loading"
                 secondaryColor="#EE6338"
-                strokeWidth={2}
-                strokeWidthSecondary={2}
+                strokeWidth={4}
+                strokeWidthSecondary={4}
               />
               Create Account
             </button>
