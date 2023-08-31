@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signupForm } from '@/constants';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
-import { styles } from '@/styles';
 import { Oval } from 'react-loader-spinner';
 
 type FormData = {
@@ -198,7 +197,7 @@ const SignupForm = () => {
 
             <button
               type="submit"
-              className={`${styles.primaryButton} col-span-12 mx-auto flex justify-center items-center gap-3`}
+              className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 py-3 px-6 col-span-12 mx-auto flex justify-center items-center gap-3"
             >
               <Oval
                 height={20}

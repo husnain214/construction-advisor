@@ -1,6 +1,5 @@
 import { navLinks } from '@/constants';
 import { ProfilePicture } from '@/public';
-import { styles } from '@/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,8 +13,8 @@ const Navbar = () => {
   const active = '/general';
 
   return (
-    <aside className="bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-4 py-10">
-      <div className="grid grid-cols-[auto_1fr] gap-x-2">
+    <div className="bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-10 py-10">
+      <header className="grid grid-cols-[auto_1fr] gap-x-4">
         <Image
           className="row-span-2 rounded-[17px] border border-green-700"
           src={ProfilePicture}
@@ -24,16 +23,18 @@ const Navbar = () => {
 
         <span className="font-bold text-lg">{user.name}</span>
         <span className="text-gray-500">@{user.username}</span>
-      </div>
+      </header>
 
       <nav className="grid mt-10">
         <ul className="flex flex-col align-start gap-4">
           {navLinks.map(({ name, href, Icon }) => (
             <li
               key={name}
-              className={`${href === active ? styles.activeLink : ''} ${
-                href === '/login' ? 'mt-auto' : ''
-              }`}
+              className={`font-medium ${
+                href === active
+                  ? 'relative py-1 before:absolute before:inset-0 before:-left-5 before:bg-primary before:h-[120%] before:w-1.5 before:rounded-full'
+                  : ''
+              } ${href === '/login' ? 'mt-auto' : ''}`}
             >
               <Link
                 href={href}
@@ -48,7 +49,7 @@ const Navbar = () => {
           ))}
         </ul>
       </nav>
-    </aside>
+    </div>
   );
 };
 

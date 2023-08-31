@@ -4,7 +4,6 @@ import { z, ZodType } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { styles } from '@/styles';
 import { useState } from 'react';
 import { Oval } from 'react-loader-spinner';
 
@@ -89,7 +88,7 @@ const LoginForm = () => {
           </div>
           <button
             type="submit"
-            className={`${styles.primaryButton} justify-self-center flex justify-center items-center gap-3`}
+            className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 py-3 px-6 justify-self-center flex justify-center items-center gap-3"
           >
             <Oval
               height={20}
