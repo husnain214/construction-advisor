@@ -50,7 +50,7 @@ const LoginForm = () => {
             <input
               {...register('email')}
               aria-invalid={errors.email ? 'true' : 'false'}
-              className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+              className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500"
             />
             {errors.email && (
               <span role="alert" className="text-red-500 text-sm">
@@ -64,7 +64,7 @@ const LoginForm = () => {
               type="password"
               {...register('password')}
               aria-invalid={errors.password ? 'true' : 'false'}
-              className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+              className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500"
             />
             {errors.password && (
               <span role="alert" className="text-red-500 text-sm">
@@ -76,19 +76,19 @@ const LoginForm = () => {
           <div className="flex items-center">
             <input
               type="checkbox"
-              className="shrink-0 mt-0.5 border-gray-200 accent-red-500 rounded text-red-500 focus:ring-red-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800"
+              className="shrink-0 mt-0.5 border-gray-200 accent-red-500 rounded text-red-500 focus:ring-red-500"
               id="hs-checked-checkbox"
             />
             <label
               htmlFor="hs-checked-checkbox"
-              className="text-sm text-gray-500 ml-3 dark:text-gray-400"
+              className="text-sm text-gray-500 ml-3"
             >
               Remember me
             </label>
           </div>
           <button
             type="submit"
-            className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 py-3 px-6 justify-self-center flex justify-center items-center gap-3"
+            className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 justify-self-center flex justify-center items-center gap-3"
           >
             <Oval
               height={20}

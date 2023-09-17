@@ -66,7 +66,7 @@ const SignupForm = () => {
   return (
     <>
       <main className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <article className="bg-white shadow p-4 sm:p-7 dark:bg-slate-900 rounded-xl mx-auto grid gap-5 w-[90vw] max-w-[40rem]">
+        <article className="bg-white shadow p-4 sm:p-7 rounded-xl mx-auto grid gap-5 w-[90vw] max-w-[40rem]">
           <header>
             <h1 className="text-3xl font-bold text-center mb-7">
               Get Onboard: Sign Up Here
@@ -149,7 +149,7 @@ const SignupForm = () => {
               </Fragment>
             ))}
 
-            <span className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+            <span className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5">
               Gender
             </span>
 
@@ -157,7 +157,7 @@ const SignupForm = () => {
               {signupForm.radioButtons.map((radio, index) => (
                 <label
                   key={radio}
-                  className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary"
                 >
                   <input
                     {...register('gender')}
@@ -167,7 +167,7 @@ const SignupForm = () => {
                     checked={index === 0}
                   />
 
-                  <span className="text-sm text-gray-500 ml-3 dark:text-gray-400 capitalize">
+                  <span className="text-sm text-gray-500 ml-3 capitalize">
                     {radio}
                   </span>
                 </label>
@@ -176,7 +176,7 @@ const SignupForm = () => {
 
             <label
               htmlFor="dateOfBirth"
-              className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
+              className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5"
             >
               Date of Birth
             </label>
@@ -197,7 +197,7 @@ const SignupForm = () => {
 
             <button
               type="submit"
-              className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 py-3 px-6 col-span-12 mx-auto flex justify-center items-center gap-3"
+              className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 col-span-12 mx-auto flex justify-center items-center gap-3"
             >
               <Oval
                 height={20}
