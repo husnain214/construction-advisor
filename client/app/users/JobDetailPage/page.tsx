@@ -3,7 +3,7 @@ import Layout from '../Layout';
 const JobDetailPage = () => {
   return (
     <Layout>
-      <h1>Hello</h1>
+      <h1>Bye</h1>
     </Layout>
   );
 };
