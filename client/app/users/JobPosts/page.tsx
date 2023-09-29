@@ -5,7 +5,6 @@ import { GigInfo } from '@/components';
 function JobPost() {
   return (
     <Layout>
-      {/* <div> */}
       <div className="mx-20">
         <div className="flex justify-between">
           <div className=" mt-12 h-10">
@@ -17,13 +16,6 @@ function JobPost() {
               <div className="flex items-center justify-center">New</div>
             </button>
           </div>
-        </div>
-        <div className="flex justify-around mt-12 font-semibold  text-sky-950 text-sm">
-          <div className="">ID</div>
-          <div className="">Construction Name</div>
-          <div className="">Contractor</div>
-          <div className="">Amount</div>
-          <div className="">Status</div>
         </div>
         <GigInfo />
       </div>
