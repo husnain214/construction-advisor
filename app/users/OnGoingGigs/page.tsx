@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Layout from '../Layout';
+import Layout from '../layout';
 import { GigInfo } from '@/components';
 
 function OnGoingGigs() {

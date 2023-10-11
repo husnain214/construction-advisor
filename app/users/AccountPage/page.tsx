@@ -1,5 +1,5 @@
 'use client';
-import Layout from '../Layout';
+import Layout from '../layout';
 
 const AccountPage = () => {
   return (
