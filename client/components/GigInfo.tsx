@@ -56,7 +56,18 @@ function GigInfo() {
       </div>
     </div>
   ));
-  return <div>{constructionInfo}</div>;
+  return (
+    <div>
+      <div className="flex justify-around mt-12 font-semibold  text-sky-950 text-sm">
+        <div className="">ID</div>
+        <div className="">Construction Name</div>
+        <div className="">Contractor</div>
+        <div className="">Amount</div>
+        <div className="">Status</div>
+      </div>
+      <div>{constructionInfo}</div>
+    </div>
+  );
 }
 
 export default GigInfo;
