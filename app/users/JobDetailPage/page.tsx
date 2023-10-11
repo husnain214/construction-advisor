@@ -7,4 +7,5 @@ const JobDetailPage = () => {
     </Layout>
   );
 };
+
 export default JobDetailPage;
