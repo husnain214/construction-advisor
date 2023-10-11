@@ -13,7 +13,7 @@ const Navbar = () => {
   const active = '/general';
 
   return (
-    <div className="bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-10 py-10">
+    <div className="bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-10 py-10 sticky top-0 max-h-[100vh]">
       <header className="grid grid-cols-[auto_1fr] gap-x-4">
         <Image
           className="row-span-2 rounded-[17px] border border-green-700"
