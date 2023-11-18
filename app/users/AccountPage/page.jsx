@@ -1,9 +1,6 @@
-'use client';
-import Layout from '../layout';
-
 const AccountPage = () => {
   return (
-    <Layout>
+    <>
       <div>
         <header>
           <h1 className="text-3xl font-bold text-left px-10 py-10">
@@ -46,7 +43,7 @@ const AccountPage = () => {
           </button>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

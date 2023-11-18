@@ -1,40 +1,32 @@
 'use client';
 
-import Image, { StaticImageData } from 'next/image';
-import { ProfileAvatar, UploadIcon } from '../../../public';
-import { z, ZodType } from 'zod';
+import Image from 'next/image';
+import { ProfileAvatar, UploadIcon } from '../../public';
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signupForm } from '@/constants';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Oval } from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
+import { addUser } from '@/redux/reducers/userReducer';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-type FormData = {
-  profileAvatar: FileList;
-  fullname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phoneNumber: string;
-  cnicNumber: string;
-  gender: string;
-  dateOfBirth: Date;
-  age?: unknown;
-};
-
-const schema: ZodType<FormData> = z
+const schema = z
   .object({
-    profileAvatar: z.custom<FileList>().refine((data) => data.length > 0, {
+    profileAvatar: z.custom().refine((data) => data.length > 0, {
       message: 'Profile picture is required',
     }),
-    fullname: z.string().max(30).nonempty(),
-    email: z.string().email().nonempty().nonempty(),
-    password: z.string().max(20).nonempty(),
-    confirmPassword: z.string().max(20).nonempty(),
+    fullname: z.string().min(1).max(30),
+    email: z.string().min(1).email(),
+    password: z.string().min(5).max(20),
+    confirmPassword: z.string().min(5).max(20),
     phoneNumber: z.string().min(9).max(13),
     cnicNumber: z.string().min(9).max(13),
-    gender: z.string().nonempty(),
+    gender: z.string(),
+    role: z.string(),
     dateOfBirth: z.coerce.date().max(new Date()),
     age: z.preprocess(
       (arg) => parseInt(z.string().parse(arg)),
@@ -47,20 +39,50 @@ const schema: ZodType<FormData> = z
   });
 
 const SignupForm = () => {
-  const [avatar, setAvatar] = useState<string | StaticImageData>(ProfileAvatar);
+  const [avatar, setAvatar] = useState(ProfileAvatar);
   const [submitting, setSubmitting] = useState(false);
+  const [signupError, setSignupError] = useState('');
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm({
     resolver: zodResolver(schema),
   });
 
-  const submit = (data: FormData) => {
+  const submit = async (data) => {
     setSubmitting(true);
-    console.log(data);
+    const formData = new FormData();
+    formData.append('file', data.profileAvatar[0]);
+    formData.append('upload_preset', 'ml_default');
+    const { data: picture } = await axios.post(
+      'https://api.cloudinary.com/v1_1/dyo9kvck4/image/upload',
+      formData,
+    );
+    const userData = {
+      email: data.email,
+      password: data.password,
+      name: data.fullname,
+      age: data.age,
+      gender: data.gender,
+      dob: data.dateOfBirth,
+      cnic: data.cnicNumber,
+      phone: data.phoneNumber,
+      picture: picture.url,
+      role: data.role,
+    };
+    try {
+      await dispatch(addUser(userData));
+      router.push('/users/login');
+    } catch (error) {
+      console.error(error);
+      setSignupError('signup failed!');
+      setTimeout(() => setSignupError(''), 5000);
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -128,7 +150,7 @@ const SignupForm = () => {
 
                 <div className="sm:col-span-9">
                   <input
-                    {...register(field.name as keyof FormData)}
+                    {...register(field.name)}
                     className={`py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary ${
                       field.type === 'number'
                         ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
@@ -136,13 +158,11 @@ const SignupForm = () => {
                     }`}
                     placeholder={field.placeholder}
                     type={field.type}
-                    aria-invalid={
-                      errors[field.name as keyof FormData] ? 'true' : 'false'
-                    }
+                    aria-invalid={errors[field.name] ? 'true' : 'false'}
                   />
-                  {errors[field.name as keyof FormData] && (
+                  {errors[field.name] && (
                     <span role="alert" className="text-red-500 text-sm">
-                      {errors[field.name as keyof FormData]?.message ?? ''}
+                      {errors[field.name]?.message ?? ''}
                     </span>
                   )}
                 </div>
@@ -154,21 +174,46 @@ const SignupForm = () => {
             </span>
 
             <div className="sm:col-span-9 sm:flex">
-              {signupForm.radioButtons.map((radio, index) => (
+              {signupForm.genders.map((gender) => (
                 <label
-                  key={radio}
+                  key={gender}
                   className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary"
                 >
                   <input
                     {...register('gender')}
                     type="radio"
                     className="shrink-0 mt-0.5 border border-gray-200 rounded-full accent-primary pointer-events-none"
-                    id={radio}
-                    checked={index === 0}
+                    id={gender}
+                    value={gender}
                   />
 
                   <span className="text-sm text-gray-500 ml-3 capitalize">
-                    {radio}
+                    {gender}
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            <span className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5">
+              Role
+            </span>
+
+            <div className="sm:col-span-9 sm:flex">
+              {signupForm.roles.map((role) => (
+                <label
+                  key={role}
+                  className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary"
+                >
+                  <input
+                    {...register('role')}
+                    type="radio"
+                    className="shrink-0 mt-0.5 border border-gray-200 rounded-full accent-primary pointer-events-none"
+                    id={role}
+                    value={role}
+                  />
+
+                  <span className="text-sm text-gray-500 ml-3 capitalize">
+                    {role}
                   </span>
                 </label>
               ))}
@@ -218,12 +263,18 @@ const SignupForm = () => {
           <footer>
             <p className="text-center">
               Already have an account?
-              <Link className="text-primary ml-2 underline" href={'/login'}>
+              <Link className="text-primary ml-2 underline" href={'/'}>
                 Sign in here!
               </Link>
             </p>
           </footer>
         </article>
+
+        {signupError && (
+          <span role="alert" className="text-red-500 text-sm">
+            {signupError}
+          </span>
+        )}
       </main>
     </>
   );

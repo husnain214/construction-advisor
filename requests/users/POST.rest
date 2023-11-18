@@ -1,2 +1,15 @@
-POST http://localhost:3000/api/users
+POST  http://localhost:3000/api/users
 Content-Type: application/json
+
+{
+    "email": "husnainzahid214@gmail.com",
+    "password": "oken88889",
+    "name": "Husnain Zahid",
+    "age": 25,
+    "gender": "Male",
+    "dob": "2000-01-01T00:00:00Z",
+    "cnic": "1234567890123",
+    "phone": "+1234567890",
+    "picture": "https://example.com/john_doe.jpg",
+    "role": "CUSTOMER"
+}

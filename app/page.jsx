@@ -1,36 +1,42 @@
 'use client';
 
-import { z, ZodType } from 'zod';
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Oval } from 'react-loader-spinner';
+import { useRouter } from 'next/navigation';
+import { userLogin } from '@/redux/reducers/userReducer';
+import { useDispatch } from 'react-redux';
 
-type FormData = {
-  email: string;
-  password: string;
-};
-
-const schema: ZodType<FormData> = z.object({
-  email: z.string().nonempty().email(),
-  password: z.string().nonempty().min(5).max(20),
+const schema = z.object({
+  email: z.string().min(1).email(),
+  password: z.string().min(1).min(5).max(20),
 });
 
-const LoginForm = () => {
+const App = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
+  } = useForm({ resolver: zodResolver(schema) });
 
   const [submitting, setSubmitting] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const submit = (data: FormData) => {
+  const submit = async (data) => {
     setSubmitting(true);
-    console.log(data);
+    try {
+      await dispatch(userLogin(data));
+      router.push('/users');
+    } catch (error) {
+      setLoginError('invalid credentials');
+      setTimeout(() => setLoginError(''), 5000);
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -73,19 +79,6 @@ const LoginForm = () => {
             )}
           </div>
 
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              className="shrink-0 mt-0.5 border-gray-200 accent-red-500 rounded text-red-500 focus:ring-red-500"
-              id="hs-checked-checkbox"
-            />
-            <label
-              htmlFor="hs-checked-checkbox"
-              className="text-sm text-gray-500 ml-3"
-            >
-              Remember me
-            </label>
-          </div>
           <button
             type="submit"
             className="bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 justify-self-center flex justify-center items-center gap-3"
@@ -117,8 +110,14 @@ const LoginForm = () => {
           </p>
         </footer>
       </div>
+
+      {loginError && (
+        <span role="alert" className="text-red-500 text-sm">
+          {loginError}
+        </span>
+      )}
     </main>
   );
 };
 
-export default LoginForm;
+export default App;

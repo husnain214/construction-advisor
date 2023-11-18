@@ -1,15 +1,5 @@
-import React from 'react';
-
 function GigInfo() {
-  type Info = {
-    id: string;
-    siteName: string;
-    contractor: string;
-    amount: number;
-    status: string;
-  };
-
-  const Information: Info[] = [
+  const Information = [
     {
       id: '#Rt5643',
       siteName: 'School Wall Construction',
@@ -41,7 +31,10 @@ function GigInfo() {
   ];
 
   const constructionInfo = Information.map((info) => (
-    <div className="flex justify-around mt-9 font-semibold text-sm text-sky-950 bg-slate-200 rounded-lg py-5">
+    <div
+      key={info.id}
+      className="flex justify-around mt-9 font-semibold text-sm text-sky-950 bg-slate-200 rounded-lg py-5"
+    >
       <div className="flex items-center">{info.id}</div>
       <div className="flex items-center text-slate-500 text-xs">
         {info.siteName}

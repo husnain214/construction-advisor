@@ -1,6 +1,4 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
+const config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,12 +7,12 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'primary': ['var(--poppins-font)', 'sans-serif'],
+        primary: ['var(--poppins-font)', 'sans-serif'],
       },
       colors: {
-        'primary': '#EE6338',
-      }
-    }
+        primary: '#EE6338',
+      },
+    },
   },
   plugins: [],
 };

@@ -1,4 +1,10 @@
-import { BriefcaseIcon, CalculatorIcon, EnvelopeIcon, HomeIcon, LogoutIcon, UserIcon } from '@/public';
+import {
+  BriefcaseIcon,
+  CalculatorIcon,
+  EnvelopeIcon,
+  HomeIcon,
+  UserIcon,
+} from '@/public';
 
 export const signupForm = {
   textFields: [
@@ -6,36 +12,36 @@ export const signupForm = {
       type: 'text',
       name: 'fullname',
       label: 'Full Name',
-      placeholder: 'Maria Boone'
+      placeholder: 'Maria Boone',
     },
     {
       type: 'email',
       name: 'email',
       label: 'Email',
-      placeholder: 'maria@site.com'
+      placeholder: 'maria@site.com',
     },
     {
       type: 'password',
       name: 'password',
       label: 'Password',
-      placeholder: 'Enter password'
+      placeholder: 'Enter password',
     },
     {
       type: 'password',
       name: 'confirmPassword',
       label: 'Confirm Password',
-      placeholder: 'Confirm your password'
+      placeholder: 'Confirm your password',
     },
     {
       name: 'phoneNumber',
       label: 'Phone',
-      placeholder: '+92xxxxxxxxxx'
+      placeholder: '+92xxxxxxxxxx',
     },
     {
       type: 'text',
       name: 'cnicNumber',
       label: 'CNIC',
-      placeholder: 'xxxxxxxxxxxx'
+      placeholder: 'xxxxxxxxxxxx',
     },
     {
       type: 'text',
@@ -44,13 +50,14 @@ export const signupForm = {
       placeholder: 'Enter your age',
     },
   ],
-  radioButtons: [ 'male', 'female', 'other' ],
+  genders: ['male', 'female', 'other'],
+  roles: ['customer', 'contractor'],
 };
 
 export const navLinks = [
   {
     name: 'General',
-    href: '/general',
+    href: '/users',
     Icon: HomeIcon,
   },
   {
@@ -65,17 +72,12 @@ export const navLinks = [
   },
   {
     name: 'Account',
-    href: '',
+    href: '/users/AccountPage',
     Icon: UserIcon,
   },
   {
     name: 'Jobs',
-    href: '',
+    href: '/users/JobPosts',
     Icon: BriefcaseIcon,
   },
-  {
-    name: 'Log out',
-    href: '/login',
-    Icon: LogoutIcon,
-  }
 ];

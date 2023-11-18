@@ -1,10 +1,10 @@
-import React from 'react';
-import Layout from '../layout';
+'use client';
+
 import { GigInfo } from '@/components';
 
 function JobPost() {
   return (
-    <Layout>
+    <>
       <div className="mx-20">
         <div className="flex justify-between">
           <div className=" mt-12 h-10">
@@ -19,7 +19,7 @@ function JobPost() {
         </div>
         <GigInfo />
       </div>
-    </Layout>
+    </>
   );
 }
 

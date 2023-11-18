@@ -4,14 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-.git
+.yarn/install-state.gz
 .env
-build
-dist 
-node_modules
-
 # testing
 /coverage
+
 # next.js
 /.next/
 /out/

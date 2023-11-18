@@ -1,14 +1,9 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
   extends: [
     'next',
     'next/core-web-vitals',
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
   ],
   overrides: [],
   settings: {
@@ -21,7 +16,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
     'jsx-quotes': ['error', 'prefer-double'],

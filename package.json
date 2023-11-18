@@ -1,39 +1,41 @@
 {
-  "name": "client",
+  "name": "construction-advisor",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "migrate": "prisma migrate dev --name init",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier . --write"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.3.0",
-    "@types/node": "20.5.0",
-    "@types/react": "18.2.20",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.15",
-    "eslint-config-next": "13.4.17",
-    "next": "13.4.17",
-    "postcss": "8.4.28",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "^7.45.4",
+    "@hookform/resolvers": "^3.3.2",
+    "@prisma/client": "^5.5.2",
+    "@reduxjs/toolkit": "^1.9.7",
+    "axios": "^1.6.1",
+    "jsonwebtoken": "^9.0.2",
+    "next": "14.0.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.48.2",
     "react-loader-spinner": "^5.4.5",
-    "tailwind-merge": "^1.14.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6",
-    "zod": "^3.22.2"
+    "react-redux": "^8.1.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.4.0",
-    "eslint": "^8.47.0",
+    "@types/node": "20.9.0",
+    "autoprefixer": "^10.0.1",
+    "bcryptjs": "^2.4.3",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "14.0.2",
     "eslint-plugin-react": "^7.33.2",
-    "prettier": "3.0.2",
-    "prettier-plugin-tailwindcss": "^0.5.3"
+    "postcss": "^8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "prisma": "^5.5.2",
+    "tailwindcss": "^3.3.0"
   }
 }

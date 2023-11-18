@@ -1,11 +1,11 @@
-import React from 'react';
+'use client';
+
 import Link from 'next/link';
-import Layout from '../layout';
 import { GigInfo } from '@/components';
 
-function OnGoingGigs() {
+function Home() {
   return (
-    <Layout>
+    <>
       <div className="mx-20">
         <div className="mt-12 text-2xl  text-sky-950 font-black">
           {' '}
@@ -30,8 +30,8 @@ function OnGoingGigs() {
         </div>
         <GigInfo />
       </div>
-    </Layout>
+    </>
   );
 }
 
-export default OnGoingGigs;
+export default Home;
