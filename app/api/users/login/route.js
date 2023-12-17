@@ -2,9 +2,12 @@ import * as bcrypt from 'bcryptjs';
 import { SignJWT } from 'jose';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/libs/prisma';
+import { createSecretKey } from 'crypto';
 
 export async function POST(request) {
   const credentials = await request.json();
+
+  console.log(credentials);
 
   const user = await prisma.user.findFirst({
     where: {
@@ -34,7 +37,7 @@ export async function POST(request) {
     id: user.id,
   };
 
-  const secretKey = process.env.SECRET_KEY;
+  const secretKey = createSecretKey(process.env.SECRET_KEY, 'utf-8');
 
   if (!secretKey) {
     return NextResponse.json(
@@ -45,10 +48,10 @@ export async function POST(request) {
     );
   }
 
-  const token = await SignJWT(
-    userForToken,
-    new TextEncoder().encode(process.env.SECRET_KEY),
-  );
+  const token = await new SignJWT(userForToken)
+    .setProtectedHeader({ alg: 'HS256' })
+    .sign(secretKey);
+
   const authUser = {
     id,
     email,

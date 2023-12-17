@@ -9,10 +9,9 @@ export const middleware = async (request) => {
 
   if (path.startsWith('/api') && token) {
     const headers = new Headers(request.headers);
-    const { id, role } = await helpers.getTokenData(request);
+    const { id } = await helpers.getTokenData(request);
 
     headers.set('user', id);
-    headers.set('role', role);
 
     return NextResponse.next({
       request: {
@@ -36,5 +35,5 @@ export const middleware = async (request) => {
 };
 
 export const config = {
-  matcher: ['/users', '/users/:path*', '/', '/signup', '/api', '/api/:path*'],
+  matcher: ['/users', '/users/:path*', '/', '/signup', '/api/:path*'],
 };

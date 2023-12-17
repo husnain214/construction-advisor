@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/libs/prisma';
 
 export const GET = async (request) => {
-  const userRole = request.headers.get('role');
+  const userRole = request.cookies.get('role').value;
 
   try {
     const id = request.headers.get('user');

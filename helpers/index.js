@@ -3,6 +3,7 @@ import { jwtVerify } from 'jose';
 const getTokenData = async (request) => {
   try {
     const token = request.cookies.get('token')?.value || '';
+    console.log('irl', request.cookies.get('token'));
     const decodedToken = await jwtVerify(
       token,
       new TextEncoder().encode(process.env.SECRET_KEY),
