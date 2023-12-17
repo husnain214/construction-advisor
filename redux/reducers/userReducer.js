@@ -70,9 +70,9 @@ export const addUser = (user) => {
 export const userLogin = (credentials) => {
   return async (dispatch) => {
     try {
-      console.log('reducer', credentials);
-
       const loggedUser = await auth.login(credentials);
+      console.log('loggedUser', loggedUser);
+
       dispatch(setUser(loggedUser));
     } catch (error) {
       console.error(error);
