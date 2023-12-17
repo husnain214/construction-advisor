@@ -3,7 +3,7 @@ import { SignJWT } from 'jose';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/libs/prisma';
 
-export const POST = async (request) => {
+export async function POST(request) {
   const credentials = await request.json();
 
   const user = await prisma.user.findFirst({
@@ -75,4 +75,4 @@ export const POST = async (request) => {
   });
 
   return response;
-};
+}
