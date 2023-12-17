@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "migrate": "prisma migrate dev --name init",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "npm run lint:fix && npm run prettier && next lint",
+    "lint": "next lint",
     "lint:fix": "eslint --fix .",
     "prettier": "prettier . --write"
   },
