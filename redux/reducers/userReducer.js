@@ -68,9 +68,10 @@ export const addUser = (user) => {
 };
 
 export const userLogin = (credentials) => {
-  console.log('reducer', credentials);
   return async (dispatch) => {
     try {
+      console.log('reducer', credentials);
+
       const loggedUser = await auth.login(credentials);
       dispatch(setUser(loggedUser));
     } catch (error) {
