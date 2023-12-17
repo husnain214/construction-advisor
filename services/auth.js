@@ -2,7 +2,6 @@ import axios from 'axios';
 const baseURL = '/api/users';
 
 const login = async (credentials) => {
-  console.log('login', credentials);
   const response = await axios.post(`${baseURL}/login`, credentials);
   return response.data;
 };
