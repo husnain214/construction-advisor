@@ -34,7 +34,7 @@ export const POST = async (request) => {
     id: user.id,
   };
 
-  const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
+  const secretKey = process.env.SECRET_KEY;
 
   if (!secretKey) {
     return NextResponse.json(
@@ -47,7 +47,7 @@ export const POST = async (request) => {
 
   const token = await SignJWT(
     userForToken,
-    new TextEncoder().encode(process.env.NEXT_PUBLIC_SECRET_KEY),
+    new TextEncoder().encode(process.env.SECRET_KEY),
   );
   const authUser = {
     id,

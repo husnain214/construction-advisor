@@ -5,7 +5,7 @@ const getTokenData = async (request) => {
     const token = request.cookies.get('token')?.value || '';
     const decodedToken = await jwtVerify(
       token,
-      new TextEncoder().encode(process.env.NEXT_PUBLIC_SECRET_KEY),
+      new TextEncoder().encode(process.env.SECRET_KEY),
     );
     return decodedToken.payload;
   } catch (error) {
