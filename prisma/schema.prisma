@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(uuid())
+  name             String
+  age              Int
+  gender           String
+  dob              DateTime
+  cnic             String    @unique
+  phone            String
+  picture          String
+  passwordHash     String
+  role             String
+  email            String    @unique
+  contacts         String[]
+  jobs             JobPost[] @relation("UserJobs")
+  bids             Bid[]     @relation("UserBids")
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+}
+
+model JobPost {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  status      String   @default("pending")
+  siteName    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  customer    User     @relation("UserJobs", fields: [customerId], references: [id])
+  customerId  String
+  contractor  String?
+  cost        Float?
+  bids        Bid[]    @relation("JobBids")
+}
+
+model Bid {
+  id           String   @id @default(uuid())
+  amount       Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  contractor   User     @relation("UserBids", fields: [contractorId], references: [id])
+  contractorId String
+  email        String
+  successful   Boolean  @default(false)
+  job          JobPost  @relation("JobBids", fields: [jobId], references: [id])
+  jobId        String   @unique
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  text       String
+  createdAt  DateTime @default(now())
+  senderId   String
+  receiverId String
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
