@@ -2,4 +2,4 @@ const AdminPage = () => {
   return 'Admin';
 };
 
-export default Admin;
+export default AdminPage;
