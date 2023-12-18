@@ -76,7 +76,7 @@ const SignupForm = () => {
     };
     try {
       await dispatch(addUser(userData));
-      router.push('/users/login');
+      router.push('/users');
     } catch (error) {
       console.error(error);
       setSignupError('signup failed!');

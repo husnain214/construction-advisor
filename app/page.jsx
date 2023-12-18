@@ -15,7 +15,7 @@ const schema = z.object({
   password: z.string().min(1).min(5).max(20),
 });
 
-const App = () => {
+const LoginPage = () => {
   const {
     register,
     handleSubmit,
@@ -111,4 +111,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default LoginPage;

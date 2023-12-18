@@ -4,6 +4,7 @@ import { prisma } from '@/libs/prisma';
 
 export const POST = async (request) => {
   const user = await request.json();
+  console.log(user);
   const {
     email,
     password,
@@ -49,9 +50,9 @@ export const POST = async (request) => {
       role,
     };
 
-    await prisma.user.create({ data });
+    const createdUser = await prisma.user.create({ data });
 
-    return NextResponse.json(data, { status: 201 });
+    return NextResponse.json(createdUser, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },

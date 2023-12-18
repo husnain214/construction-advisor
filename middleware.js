@@ -7,17 +7,22 @@ export const middleware = async (request) => {
   const token = request.cookies.get('token')?.value || '';
   const role = request.cookies.get('role')?.value || '';
 
-  if (path.startsWith('/api') && token) {
-    const headers = new Headers(request.headers);
-    const { id } = await helpers.getTokenData(request);
+  if (path.startsWith('/api')) {
+    try {
+      const headers = new Headers(request.headers);
+      const { id } = await helpers.getTokenData(request);
 
-    headers.set('user', id);
+      headers.set('user', id);
 
-    return NextResponse.next({
-      request: {
-        headers,
-      },
-    });
+      return NextResponse.next({
+        request: {
+          headers,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      return NextResponse.next();
+    }
   }
 
   const notContractor =
