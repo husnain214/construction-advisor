@@ -112,7 +112,11 @@ const AccountPage = () => {
             )}
           </div>
 
-          <Button type={'submit'} loading={submitting}>
+          <Button
+            type={'submit'}
+            loading={submitting}
+            style={'justify-self-start'}
+          >
             Update
           </Button>
         </form>

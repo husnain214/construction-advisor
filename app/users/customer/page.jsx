@@ -1,33 +1,18 @@
 'use client';
 
 import { JobDetails } from '@/components';
-import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 function Home() {
+  const user = useSelector((state) => state.user);
   return (
     <>
       <div>
-        <div className=" text-2xl  text-sky-950 font-black">
-          {' '}
-          Welcome Barbara!
-        </div>
-        <div className="flex justify-around mt-12  text-sky-950 text-sm">
-          <div className="bg-primary py-10 px-2 text-white rounded-3xl font-medium">
-            <Link href="/">Post a New Construction Gig</Link>
-          </div>
-          <div className="bg-sky-950 py-10 px-2 text-white rounded-3xl font-medium">
-            <Link href="/">Calculate a New Estimation</Link>
-          </div>
-          <div className="bg-primary py-10 px-2 text-white rounded-3xl font-medium">
-            <Link href="/">Add a New Payment Method</Link>
-          </div>
-          <div className="bg-sky-950 py-10 px-2 text-white rounded-3xl font-medium">
-            <Link href="/">Manage Your Account</Link>
-          </div>
-        </div>
-        <div className="mt-14  text-sky-950 text-xl font-black">
-          Ongoing Gigs
-        </div>
+        <h1 className=" text-2xl font-black">
+          Welcome {user.name.split(' ').at(0)}!
+        </h1>
+
+        <h2 className="mt-14 text-xl font-black">Ongoing Gigs</h2>
 
         <JobDetails filter="ongoing" />
       </div>

@@ -20,7 +20,7 @@ const BidDetails = () => {
         {bids.map((bid) => (
           <div
             key={bid.id}
-            className="flex justify-around font-semibold text-sm text-sky-950 bg-slate-200 py-5 mt-10 rounded-lg"
+            className="flex justify-around items-center font-semibold text-sm text-sky-950 bg-slate-200 py-5 mt-10 rounded-lg"
           >
             <span className="flex items-center uppercase">
               #{bid.id.slice(0, 6)}...

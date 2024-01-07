@@ -28,6 +28,12 @@ export const DELETE = async (_, { params }) => {
       },
     });
 
+    await prisma.bid.deleteMany({
+      where: {
+        jobId: deletedJob.id,
+      },
+    });
+
     return NextResponse.json(deletedJob);
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });

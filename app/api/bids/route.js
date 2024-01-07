@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/libs/prisma';
 
-export const GET = async (request) => {
-  const contractorId = request.headers.get('user');
-
+export const GET = async () => {
   try {
-    const bids = await prisma.bid.findMany({
-      where: {
-        contractorId,
-      },
-    });
+    const bids = await prisma.bid.findMany({});
+
     return NextResponse.json(bids);
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json(
+      { error: error.message },
+      {
+        status: 400,
+      },
+    );
   } finally {
     await prisma.$disconnect();
   }

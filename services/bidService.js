@@ -16,6 +16,11 @@ const getAll = async () => {
   return response.data;
 };
 
+const get = async () => {
+  const response = await axios.get(`${baseURL}/contractor`);
+  return response.data;
+};
+
 const acceptBid = async (id) => {
   const response = await axios.post(`${baseURL}/AcceptBid?BidId=${id}`);
   return response.data;
@@ -26,6 +31,6 @@ const deleteBid = async (id) => {
   return response.data;
 };
 
-const bidService = { create, getJobBids, getAll, acceptBid, deleteBid };
+const bidService = { create, getJobBids, getAll, acceptBid, deleteBid, get };
 
 export default bidService;

@@ -45,7 +45,7 @@ export const addBid = (bidDetails) => {
 
 export const initializeBids = () => {
   return async (dispatch) => {
-    const bids = await bidService.getAll();
+    const bids = await bidService.get();
     dispatch(setBids(bids));
   };
 };

@@ -2,7 +2,7 @@ export const signupForm = {
   textFields: [
     {
       type: 'text',
-      name: 'fullname',
+      name: 'name',
       label: 'Full Name',
       placeholder: 'Maria Boone',
     },
@@ -25,13 +25,49 @@ export const signupForm = {
       placeholder: 'Confirm your password',
     },
     {
-      name: 'phoneNumber',
+      name: 'phone',
       label: 'Phone',
       placeholder: '+92xxxxxxxxxx',
     },
     {
       type: 'text',
-      name: 'cnicNumber',
+      name: 'cnic',
+      label: 'CNIC',
+      placeholder: 'xxxxxxxxxxxx',
+    },
+    {
+      type: 'text',
+      name: 'age',
+      label: 'Age',
+      placeholder: 'Enter your age',
+    },
+  ],
+  genders: ['male', 'female', 'other'],
+  roles: ['customer', 'contractor'],
+};
+
+export const updateUserForm = {
+  textFields: [
+    {
+      type: 'text',
+      name: 'name',
+      label: 'Full Name',
+      placeholder: 'Maria Boone',
+    },
+    {
+      type: 'email',
+      name: 'email',
+      label: 'Email',
+      placeholder: 'maria@site.com',
+    },
+    {
+      name: 'phone',
+      label: 'Phone',
+      placeholder: '+92xxxxxxxxxx',
+    },
+    {
+      type: 'text',
+      name: 'cnic',
       label: 'CNIC',
       placeholder: 'xxxxxxxxxxxx',
     },

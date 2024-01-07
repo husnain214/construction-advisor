@@ -6,9 +6,13 @@ const create = async (jobDetails) => {
   return response.data;
 };
 
-const get = async (isCustomer = false) => {
-  const target = isCustomer ? `${baseURL}/customer` : baseURL;
-  const response = await axios.get(target);
+const getAll = async () => {
+  const response = await axios.get(baseURL);
+  return response.data;
+};
+
+const get = async () => {
+  const response = await axios.get(`${baseURL}/customer`);
   return response.data;
 };
 
@@ -17,6 +21,11 @@ const update = async (id, job) => {
   return response.data;
 };
 
-const jobService = { create, get, update };
+const remove = async (id) => {
+  const response = await axios.delete(`${baseURL}/${id}`);
+  return response.data;
+};
+
+const jobService = { create, get, update, getAll, remove };
 
 export default jobService;

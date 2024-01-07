@@ -30,7 +30,13 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.push(`/users/${user.role}`);
+      const paths = {
+        customer: '/users/customer',
+        contractor: '/users/contractor',
+        admin: '/admin',
+      };
+
+      router.push(paths[user.role]);
     }
   }, [user, router]);
 

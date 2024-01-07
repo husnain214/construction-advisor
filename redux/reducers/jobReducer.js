@@ -22,10 +22,13 @@ const jobSlice = createSlice({
         return job.id === action.payload.id ? changedJob : job;
       });
     },
+    removeJob(state, action) {
+      return state.map((job) => job.id !== action.payload.id);
+    },
   },
 });
 
-const { createJob, setJobPosts, editJob } = jobSlice.actions;
+const { createJob, setJobPosts, editJob, removeJob } = jobSlice.actions;
 
 export default jobSlice.reducer;
 
@@ -40,9 +43,16 @@ export const addJob = (jobDetails) => {
   };
 };
 
-export const initializeJobs = (isCustomer) => {
+export const initializeJobs = () => {
   return async (dispatch) => {
-    const jobPosts = await jobService.get(isCustomer);
+    const jobPosts = await jobService.get();
+    dispatch(setJobPosts(jobPosts));
+  };
+};
+
+export const initializeAllJobs = () => {
+  return async (dispatch) => {
+    const jobPosts = await jobService.getAll();
     dispatch(setJobPosts(jobPosts));
   };
 };
@@ -57,5 +67,12 @@ export const updateJob = (id, job) => {
   return async (dispatch) => {
     const updatedJob = await jobService.update(id, job);
     dispatch(editJob(updatedJob));
+  };
+};
+
+export const deleteJob = (id) => {
+  return async (dispatch) => {
+    const deletedJob = await jobService.remove(id);
+    dispatch(removeJob(deletedJob.id));
   };
 };

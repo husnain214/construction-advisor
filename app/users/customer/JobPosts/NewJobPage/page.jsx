@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addJob } from '@/redux/reducers/jobReducer';
-import { Button } from '@/components';
+import { BackButton, Button } from '@/components';
 import { useRouter } from 'next/navigation';
 
 const schema = z.object({
@@ -38,6 +38,8 @@ const NewJobPage = () => {
 
   return (
     <>
+      <BackButton />
+      <h1 className="text-3xl font-bold my-5 text-center">New Job Post</h1>
       <form
         action=""
         method="POST"
@@ -88,7 +90,11 @@ const NewJobPage = () => {
           )}
         </div>
 
-        <Button loading={submitting} type={'submit'}>
+        <Button
+          loading={submitting}
+          type={'submit'}
+          style={'justify-self-center'}
+        >
           Create Job Post
         </Button>
       </form>

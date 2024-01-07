@@ -5,7 +5,7 @@ const Button = ({ type, loading, onClick, style, children }) => {
     <button
       onClick={onClick}
       type={type || 'button'}
-      className={`bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 justify-self-center flex justify-center items-center gap-3 ${style}`}
+      className={`bg-primary hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 flex justify-center items-center gap-3 ${style}`}
     >
       <Oval
         height={20}

@@ -53,7 +53,7 @@ export const getUser = () => {
 export const modifyUser = (password) => {
   return async (dispatch) => {
     try {
-      const updatedUser = await userService.updateUser(password);
+      const updatedUser = await userService.changePassword(password);
       dispatch(setUser(updatedUser));
     } catch (error) {
       console.error(error);

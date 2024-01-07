@@ -41,7 +41,7 @@ const JobPage = ({ params }) => {
     createdAt,
     status,
     cost,
-  } = jobs.filter((job) => job.id === jobId)[0];
+  } = jobs.filter((job) => job.id === jobId)[0] || {};
 
   useEffect(() => {
     (async () => {
@@ -84,24 +84,48 @@ const JobPage = ({ params }) => {
   return (
     <>
       <BackButton />
-      <div>Job ID: {id}</div>
-      <div>Title: {title}</div>
-      <div>Site Name: {siteName}</div>
-      <div>Description: {description}</div>
-      <div>Created At: {createdAt}</div>
-      <div>Status: {status}</div>
-      <div>Bid Amount: {cost || 'NA'}</div>
-      <div>Contractor: {contractor || 'NA'}</div>
 
-      {status === 'ongoing' && (
-        <Button onClick={handleDeleteBid} loading={deleting}>
+      <h1 className="text-3xl font-bold my-5 text-center">Job Details</h1>
+
+      <h2 className="text-md font-bold my-3">Job ID:</h2>
+      <p>{id}</p>
+
+      <h2 className="text-md font-bold my-3">Title:</h2>
+      <p>{title}</p>
+
+      <h2 className="text-md font-bold my-3">Site Name:</h2>
+      <p>{siteName}</p>
+
+      <h2 className="text-md font-bold my-3">Description:</h2>
+      <p className="break-all">{description}</p>
+
+      <h2 className="text-md font-bold my-3">Created At:</h2>
+      <p>{createdAt}</p>
+
+      <h2 className="text-md font-bold my-3">Status:</h2>
+      <p className="capitalize">{status}</p>
+
+      <h2 className="text-md font-bold my-3">Bid Amount:</h2>
+      <p>{cost || 'NA'}</p>
+
+      <h2 className="text-md font-bold my-3">Contractor:</h2>
+      <p>{contractor || 'NA'}</p>
+
+      {status === 'ongoing' && user.name === contractor && (
+        <Button
+          onClick={handleDeleteBid}
+          loading={deleting}
+          style={'justify-self-start mt-5'}
+        >
           Delete Bid
         </Button>
       )}
 
       {formVisible && (
         <form action="" method="POST" onSubmit={handleSubmit(submit)}>
-          <label className="grid gap-4 mb-4">
+          <h2 className="text-xl font-bold my-5">Apply for this Job:</h2>
+
+          <label className="grid gap-4 mb-4 justify-start">
             Bid Amount:
             <input
               {...register('amount')}
@@ -116,7 +140,11 @@ const JobPage = ({ params }) => {
             )}
           </label>
 
-          <Button type={'submit'} loading={submitting}>
+          <Button
+            type={'submit'}
+            loading={submitting}
+            style="justify-self-start"
+          >
             Create Bid
           </Button>
         </form>

@@ -5,7 +5,7 @@ import { getUser } from '@/redux/reducers/userReducer';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingScreen } from '@/components';
-import { initializeJobs } from '@/redux/reducers/jobReducer';
+import { initializeAllJobs, initializeJobs } from '@/redux/reducers/jobReducer';
 import { initializeBids } from '@/redux/reducers/bidReducer';
 
 const Layout = ({ children }) => {
@@ -19,14 +19,14 @@ const Layout = ({ children }) => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!user) return;
     (async () => {
-      await dispatch(initializeJobs(user?.role === 'customer'));
-    })();
-  }, [dispatch, user]);
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(initializeBids(user?.role === 'contractor'));
+      if (user.role === 'customer') {
+        dispatch(initializeJobs());
+      } else if (user.role === 'contractor') {
+        dispatch(initializeBids());
+        dispatch(initializeAllJobs());
+      }
     })();
   }, [dispatch, user]);
 
