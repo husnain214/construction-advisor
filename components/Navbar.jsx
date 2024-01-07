@@ -12,15 +12,18 @@ import {
   EnvelopeIcon,
   HomeIcon,
   UserIcon,
+  DollarIcon,
+  MultipleUserIcon,
 } from '@/public';
 
 const Navbar = () => {
   const loggedUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
+  const user = useSelector((state) => state.user);
   const pathname = usePathname();
 
-  const navLinks = [
+  const userLinks = [
     {
       name: 'General',
       href: `/users/${loggedUser.role}`,
@@ -47,6 +50,31 @@ const Navbar = () => {
       Icon: BriefcaseIcon,
     },
   ];
+
+  const adminLinks = [
+    {
+      name: 'Users',
+      href: '/admin',
+      Icon: MultipleUserIcon,
+    },
+    {
+      name: 'Jobs',
+      href: '/admin/jobs',
+      Icon: BriefcaseIcon,
+    },
+    {
+      name: 'Bids',
+      href: '/admin/bids',
+      Icon: DollarIcon,
+    },
+    {
+      name: 'Account',
+      href: '/users/AccountPage',
+      Icon: UserIcon,
+    },
+  ];
+
+  const navLinks = user.role === 'admin' ? adminLinks : userLinks;
 
   const handleLogout = async () => {
     try {

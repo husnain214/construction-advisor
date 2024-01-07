@@ -22,15 +22,15 @@ export const PUT = async (request, { params }) => {
 
 export const DELETE = async (_, { params }) => {
   try {
-    const deletedJob = await prisma.jobPost.delete({
+    await prisma.bid.deleteMany({
       where: {
-        id: params.id,
+        jobId: params.id,
       },
     });
 
-    await prisma.bid.deleteMany({
+    const deletedJob = await prisma.jobPost.delete({
       where: {
-        jobId: deletedJob.id,
+        id: params.id,
       },
     });
 

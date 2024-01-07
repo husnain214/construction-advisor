@@ -9,6 +9,8 @@ function BidsPage() {
   const { bids } = useContext(UsersContext);
   return (
     <div>
+      <h1 className="text-3xl font-bold my-5 text-center">Posted Bids</h1>
+
       <div className="flex justify-around mt-12 font-semibold  text-sky-950 text-sm">
         <div className="">ID</div>
         <div className="">Amount</div>

@@ -1,9 +1,10 @@
 'use client';
 
 import { BackButton, Bid, Button } from '@/components';
-import { deleteJob } from '@/redux/reducers/jobReducer';
+import { deleteJob, initializeJobs } from '@/redux/reducers/jobReducer';
 import bidService from '@/services/bidService';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +14,8 @@ const JobPage = ({ params }) => {
   const [deleting, setDeleting] = useState(false);
   const [bids, setBids] = useState([]);
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const {
     id,
     title,
@@ -35,10 +38,12 @@ const JobPage = ({ params }) => {
     })();
   }, [jobId, setBids]);
 
-  const omitJob = () => {
+  const omitJob = async () => {
     setDeleting(true);
     try {
-      dispatch(deleteJob(id));
+      await dispatch(deleteJob(id));
+      await dispatch(initializeJobs());
+      router.push('/users/customer/JobPosts');
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +82,7 @@ const JobPage = ({ params }) => {
       <p className="break-all">{description}</p>
 
       <h2 className="text-md font-bold my-3">Created At:</h2>
-      <p>{createdAt.split('T')[0]}</p>
+      <p>{createdAt?.split('T')[0]}</p>
 
       <h2 className="text-md font-bold my-3">Status:</h2>
       <p className="capitalize">{status}</p>
@@ -89,7 +94,10 @@ const JobPage = ({ params }) => {
       <p>{contractor || 'NA'}</p>
 
       <h2 className="text-xl font-bold my-3">Bids:</h2>
-      {bids && bids.map((bid) => <Bid key={bid.id} bid={bid} />)}
+
+      <ul className="grid justify-center">
+        {bids && bids.map((bid) => <Bid key={bid.id} bid={bid} />)}
+      </ul>
     </div>
   );
 };

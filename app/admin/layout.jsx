@@ -46,9 +46,11 @@ const Layout = ({ children }) => {
 
   return user && users ? (
     <UsersContext.Provider value={{ users, setUsers, jobs, bids }}>
-      <div className="grid grid-cols-[auto_1fr] relative items-start">
+      <div className="grid grid-cols-[auto_1fr] relative">
         <Navbar />
-        <main className="grid px-20 py-10 relative">{children}</main>
+        <main className="grid px-20 py-10 content-start relative">
+          {children}
+        </main>
       </div>
     </UsersContext.Provider>
   ) : (

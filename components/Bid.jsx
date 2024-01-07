@@ -38,12 +38,12 @@ const Bid = ({ bid }) => {
   };
 
   return (
-    <div className="flex gap-3 justify-start items-center">
-      <h1>${bid.amount}</h1>
+    <li className="flex rounded-full gap-10 justify-center items-center bg-primary bg-opacity-20 py-5 px-7">
+      <h3 className="font-bold text-xl">${bid.amount}</h3>
       {!inContacts && (
-        <button className="bg-primary" onClick={() => createChat()}>
+        <Button loading={false} onClick={createChat}>
           Add to contacts
-        </button>
+        </Button>
       )}
 
       {!bid.successful && (
@@ -51,7 +51,7 @@ const Bid = ({ bid }) => {
           Accept
         </Button>
       )}
-    </div>
+    </li>
   );
 };
 

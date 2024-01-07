@@ -26,12 +26,19 @@ export const middleware = async (request) => {
   }
 
   const notContractor =
-    role === 'customer' && path.startsWith('/users/contractor');
+    (role === 'customer' || role === 'admin') &&
+    path.startsWith('/users/contractor');
   const notCustomer =
-    role === 'contractor' && path.startsWith('/users/customer');
+    (role === 'contractor' || role === 'admin') &&
+    path.startsWith('/users/customer');
+
+  const redirUrls = {
+    user: `/users/${role}`,
+    admin: '/admin',
+  };
 
   if ((isPublicPath && token) || notContractor || notCustomer) {
-    return NextResponse.redirect(new URL(`/users/${role}`, request.nextUrl));
+    return NextResponse.redirect(new URL(redirUrls[role], request.nextUrl));
   }
 
   if (!isPublicPath && !token) {

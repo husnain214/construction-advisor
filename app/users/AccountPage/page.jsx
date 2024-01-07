@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import auth from '@/services/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout, modifyUser } from '@/redux/reducers/userReducer';
 import userService from '@/services/userService';
 import { useRouter } from 'next/navigation';
@@ -42,6 +42,7 @@ const AccountPage = () => {
   } = useForm({ resolver: zodResolver(schema) });
   const dispatch = useDispatch();
   const router = useRouter();
+  const user = useSelector((state) => state.user);
 
   const submit = async ({ newPassword: password }) => {
     setSubmitting(true);
@@ -121,13 +122,15 @@ const AccountPage = () => {
           </Button>
         </form>
 
-        <button
-          type="button"
-          onClick={deleteAccount}
-          className="bg-red-700 hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 justify-self-start flex justify-center items-center gap-3"
-        >
-          Delete Your Account
-        </button>
+        {user.role !== 'admin' && (
+          <Button
+            type="button"
+            onClick={deleteAccount}
+            style="bg-red-700 hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 justify-self-start flex justify-center items-center gap-3"
+          >
+            Delete Your Account
+          </Button>
+        )}
       </div>
     </>
   );

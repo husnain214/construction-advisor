@@ -23,7 +23,7 @@ const jobSlice = createSlice({
       });
     },
     removeJob(state, action) {
-      return state.map((job) => job.id !== action.payload.id);
+      return state.filter((job) => job.id !== action.payload.id);
     },
   },
 });

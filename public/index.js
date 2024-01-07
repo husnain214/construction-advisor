@@ -11,6 +11,8 @@ import ArrowOpenIcon from './arrow-open-icon.svg';
 import ArrowBackIcon from './arrow-back-icon.svg';
 import SearchIcon from './search-icon.svg';
 import SendIcon from './send-icon.svg';
+import DollarIcon from './dollar-icon.svg';
+import MultipleUserIcon from './multiple-user-icon.svg';
 
 export {
   ProfileAvatar,
@@ -26,4 +28,6 @@ export {
   ArrowBackIcon,
   SearchIcon,
   SendIcon,
+  DollarIcon,
+  MultipleUserIcon,
 };

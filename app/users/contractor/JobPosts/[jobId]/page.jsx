@@ -100,7 +100,7 @@ const JobPage = ({ params }) => {
       <p className="break-all">{description}</p>
 
       <h2 className="text-md font-bold my-3">Created At:</h2>
-      <p>{createdAt}</p>
+      <p>{createdAt?.split('T')[0]}</p>
 
       <h2 className="text-md font-bold my-3">Status:</h2>
       <p className="capitalize">{status}</p>
