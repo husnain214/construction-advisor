@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const ChatPage = () => {
   const dispatch = useDispatch();
   const [activeContact, setActiveContact] = useState(null);
+  const [asideVisible, setAsideVisible] = useState(false);
   const user = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
 
@@ -32,12 +33,19 @@ const ChatPage = () => {
   }, [dispatch]);
 
   return (
-    <div className="absolute inset-0 grid grid-cols-[auto_1fr] grid-rows-[100vh]">
+    <div className="absolute inset-0 grid grid-cols-1 sm:grid-cols-[auto_1fr] grid-rows-[100vh]">
       <ChatAside
         activeContact={activeContact}
         setActiveContact={setActiveContact}
+        asideVisible={asideVisible}
+        setAsideVisible={setAsideVisible}
       />
-      <ChatWindow activeContact={activeContact} messages={messages} />
+      <ChatWindow
+        setAsideVisible={setAsideVisible}
+        asideVisible={asideVisible}
+        activeContact={activeContact}
+        messages={messages}
+      />
     </div>
   );
 };

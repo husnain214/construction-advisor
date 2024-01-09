@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/libs/prisma';
+import prisma from '@/libs/prisma';
 
 export const PUT = async (request, { params }) => {
   const jobDetails = await request.json();

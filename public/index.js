@@ -13,6 +13,8 @@ import SearchIcon from './search-icon.svg';
 import SendIcon from './send-icon.svg';
 import DollarIcon from './dollar-icon.svg';
 import MultipleUserIcon from './multiple-user-icon.svg';
+import CrossIcon from './cross-icon.svg';
+import HamburgerIcon from './hamburger-icon.svg';
 
 export {
   ProfileAvatar,
@@ -30,4 +32,6 @@ export {
   SendIcon,
   DollarIcon,
   MultipleUserIcon,
+  CrossIcon,
+  HamburgerIcon,
 };

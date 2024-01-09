@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { SignJWT } from 'jose';
 import { NextResponse } from 'next/server';
-import { prisma } from '@/libs/prisma';
+import prisma from '@/libs/prisma';
 import { createSecretKey } from 'crypto';
 
 export async function POST(request) {

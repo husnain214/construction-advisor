@@ -1,9 +1,14 @@
-import { SearchIcon } from '@/public';
+import { CrossIcon, SearchIcon } from '@/public';
 import { ContactCard } from '.';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-const ChatAside = ({ setActiveContact, activeContact }) => {
+const ChatAside = ({
+  setActiveContact,
+  activeContact,
+  asideVisible,
+  setAsideVisible,
+}) => {
   const [filter, setFilter] = useState('');
   const contacts = useSelector((state) => state.contacts);
   const filteredContacts = filter
@@ -11,7 +16,18 @@ const ChatAside = ({ setActiveContact, activeContact }) => {
     : contacts;
 
   return (
-    <aside className="xs:w-full md:w-[350px] h-full bg-gray-50 xs:px-5 md:p-0 flex flex-col overflow-visible transition-all duration-500 xs:grow-1 md:grow-0 xs:overflow-y-scroll md:overflow-visible scrollbar-hidden">
+    <aside
+      className={`col-start-1 sm:col-start-auto col-end-1 sm:col-end-auto row-start-1 sm:row-start-auto row-end-1 sm:row-end-auto z-20 sm:translate-x-0 ${
+        asideVisible ? '' : '-translate-x-full'
+      } xs:w-full md:w-[350px] h-full bg-gray-50 xs:px-5 md:p-0 flex flex-col overflow-visible transition-all duration-500 xs:grow-1 md:grow-0 xs:overflow-y-scroll md:overflow-visible scrollbar-hidden`}
+    >
+      <button
+        className="absolute z-10 right-5 top-5 block sm:hidden"
+        onClick={() => setAsideVisible(false)}
+      >
+        <CrossIcon className={'w-10'} />
+      </button>
+
       <div className="h-full flex flex-col">
         <p className=" px-5 py-6 text-black text-xl leading-4 tracking-[0.16px] outline-none font-bold">
           Messages

@@ -35,6 +35,7 @@ const schema = z
 
 const AccountPage = () => {
   const [submitting, setSubmitting] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -57,6 +58,8 @@ const AccountPage = () => {
   };
 
   const deleteAccount = async () => {
+    setDeleting(true);
+
     try {
       await userService.deleteUser();
       await dispatch(logout());
@@ -64,6 +67,8 @@ const AccountPage = () => {
     } catch (error) {
       console.error(error);
     }
+
+    setDeleting(false);
   };
 
   return (
@@ -125,6 +130,7 @@ const AccountPage = () => {
         {user.role !== 'admin' && (
           <Button
             type="button"
+            loading={deleting}
             onClick={deleteAccount}
             style="bg-red-700 hover:bg-red-400 transition-all text-white rounded-full py-3 px-6 justify-self-start flex justify-center items-center gap-3"
           >

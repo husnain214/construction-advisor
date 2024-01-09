@@ -14,9 +14,10 @@ import {
   UserIcon,
   DollarIcon,
   MultipleUserIcon,
+  CrossIcon,
 } from '@/public';
 
-const Navbar = () => {
+const Navbar = ({ navVisible, setNavVisible }) => {
   const loggedUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -86,7 +87,18 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-10 py-10 sticky top-0 max-h-[100vh]">
+    <div
+      className={`col-start-1 sm:col-start-auto col-end-1 sm:col-end-auto row-start-1 sm:row-start-auto row-end-1 sm:row-end-auto z-20 sm:translate-x-0 ${
+        navVisible ? '' : '-translate-x-full'
+      } bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-10 py-10 sticky top-0 max-h-screen transition-all duration-500`}
+    >
+      <button
+        className="absolute z-10 right-5 top-5 block sm:hidden"
+        onClick={() => setNavVisible(false)}
+      >
+        <CrossIcon className={'w-10'} />
+      </button>
+
       <header className="grid grid-cols-[auto_1fr] items-center gap-x-4">
         <Image
           className="rounded-[17px] aspect-square object-cover"
@@ -113,6 +125,7 @@ const Navbar = () => {
                 }`}
               >
                 <Link
+                  onClick={() => setNavVisible(false)}
                   href={href}
                   className={`text-md flex justify-start items-center gap-2 capitalize ${
                     pathname === href ? 'text-black' : 'text-gray-600'

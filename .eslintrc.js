@@ -16,6 +16,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  globals: {
+    globalThis: 'readonly',
+  },
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
