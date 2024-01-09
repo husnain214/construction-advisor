@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
   return user ? (
     <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] relative">
       <Navbar navVisible={navVisible} setNavVisible={setNavVisible} />
-      <main className="grid px-20 pt-20 sm:py-10 relative col-start-1 sm:col-start-auto col-end-1 sm:col-end-auto row-start-1 sm:row-start-auto row-end-1 sm:row-end-auto">
+      <main className="grid px-5 sm:px-20 pt-20 sm:py-10 relative col-start-1 sm:col-start-auto col-end-1 sm:col-end-auto row-start-1 sm:row-start-auto row-end-1 sm:row-end-auto">
         <button
           className="absolute z-10 left-5 top-5 block sm:hidden"
           onClick={() => setNavVisible(true)}

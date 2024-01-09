@@ -98,9 +98,9 @@ const SignupForm = () => {
           <form
             onSubmit={handleSubmit(submit)}
             action=""
-            className="grid sm:grid-cols-12 gap-2 sm:gap-6"
+            className="sm:grid sm:grid-cols-12 gap-2 sm:gap-6"
           >
-            <span className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5">
+            <span className="col-span-3 inline-block text-sm text-gray-800 mt-2.5 mb-2 sm:mb-0">
               Profile photo
             </span>
 
@@ -143,7 +143,7 @@ const SignupForm = () => {
               <Fragment key={field.name}>
                 <label
                   htmlFor={field.name}
-                  className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5"
+                  className="col-span-3 inline-block text-sm text-gray-800 mt-2.5 mb-2 sm:mb-0"
                 >
                   {field.label}
                 </label>
@@ -169,7 +169,7 @@ const SignupForm = () => {
               </Fragment>
             ))}
 
-            <span className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5">
+            <span className="col-span-3 inline-block text-sm text-gray-800 mt-2.5">
               Gender
             </span>
 
@@ -177,7 +177,7 @@ const SignupForm = () => {
               {signupForm.genders.map((gender) => (
                 <label
                   key={gender}
-                  className="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary"
+                  className="flex py-2 px-3 mb-2w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-primary focus:ring-primary"
                 >
                   <input
                     {...register('gender')}
@@ -194,7 +194,7 @@ const SignupForm = () => {
               ))}
             </div>
 
-            <span className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5">
+            <span className="col-span-3 inline-block text-sm text-gray-800 mt-2.5 mb-2 sm:mb-0">
               Role
             </span>
 
@@ -221,7 +221,7 @@ const SignupForm = () => {
 
             <label
               htmlFor="dateOfBirth"
-              className="sm:col-span-3 inline-block text-sm text-gray-800 mt-2.5"
+              className="col-span-3 inline-block text-sm text-gray-800 mt-2.5 mb-2 sm:mb-0"
             >
               Date of Birth
             </label>
