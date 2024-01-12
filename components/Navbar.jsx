@@ -32,7 +32,7 @@ const Navbar = ({ navVisible, setNavVisible }) => {
     },
     {
       name: 'Calculator',
-      href: '',
+      href: '/users/CalculatorPage',
       Icon: CalculatorIcon,
     },
     {

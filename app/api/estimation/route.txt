@@ -1,0 +1,37 @@
+import { NextResponse } from 'next/server';
+import { spawn } from 'child_process';
+
+export const POST = async (request) => {
+  const { type, location, area, baths, bedrooms } = await request.json();
+
+  const childPython = spawn('python', [
+    'estimate.py',
+    type,
+    location,
+    area,
+    baths,
+    bedrooms,
+  ]);
+
+  const pricePromise = new Promise((reject, resolve) => {
+    childPython.stdout.on('data', (data) => {
+      resolve(JSON.parse(data));
+    });
+
+    childPython.stderr.on('data', (data) => {
+      reject(data);
+    });
+  });
+
+  try {
+    const price = await pricePromise;
+
+    return NextResponse.json({ price });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  } finally {
+    childPython.on('close', (code) => {
+      console.log('child process exited with code ' + code);
+    });
+  }
+};

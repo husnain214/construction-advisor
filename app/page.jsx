@@ -12,7 +12,7 @@ import { Button } from '@/components';
 
 const schema = z.object({
   email: z.string().min(1).email(),
-  password: z.string().min(1).min(5).max(20),
+  password: z.string().min(5).max(20),
 });
 
 const LoginPage = () => {

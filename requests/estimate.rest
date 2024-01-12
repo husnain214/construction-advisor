@@ -1,0 +1,10 @@
+POST http://localhost:3000/api/estimation 
+Content-Type: application/json
+
+{
+  "type": "House",
+  "location": "Paragon City, Lahore, Punjab",
+  "area": "10 Marla",
+  "baths": 4,
+  "bedrooms": 4
+}
