@@ -8,7 +8,7 @@ function Home() {
   return (
     <>
       <div>
-        <h1 className=" text-2xl font-black">
+        <h1 className="text-2xl font-black">
           Welcome {user.name.split(' ').at(0)}!
         </h1>
 

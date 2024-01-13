@@ -1,20 +1,14 @@
 'use client';
 
-import axios from 'axios';
+import { UsersContext } from '@/context';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 const JobsPage = () => {
-  const [jobs, setJobs] = useState([]);
+  const { jobs } = useContext(UsersContext);
 
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get('/api/jobs');
-      setJobs(response.data);
-    })();
-  }, []);
   return (
-    <>
+    <div>
       <h1 className="text-3xl font-bold my-5 text-center">Posted Jobs</h1>
 
       <div>
@@ -50,7 +44,7 @@ const JobsPage = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

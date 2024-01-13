@@ -7,6 +7,7 @@ import { useContext } from 'react';
 
 function BidsPage() {
   const { bids } = useContext(UsersContext);
+
   return (
     <div>
       <h1 className="text-3xl font-bold my-5 text-center">Posted Bids</h1>

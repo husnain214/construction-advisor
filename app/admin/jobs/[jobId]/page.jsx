@@ -22,14 +22,31 @@ const JobPage = ({ params }) => {
     <>
       <BackButton />
 
-      <div>Job ID: {id}</div>
-      <div>Title: {title}</div>
-      <div>Site Name: {siteName}</div>
-      <div>Description: {description}</div>
-      <div>Created At: {createdAt}</div>
-      <div>Status: {status}</div>
-      <div>Bid Amount: {cost || 'NA'}</div>
-      <div>Contractor: {contractor || 'NA'}</div>
+      <h1 className="text-3xl font-bold my-5 text-center">Job Details</h1>
+
+      <h2 className="text-md font-bold my-3">Job ID:</h2>
+      <p>{id}</p>
+
+      <h2 className="text-md font-bold my-3">Title:</h2>
+      <p>{title}</p>
+
+      <h2 className="text-md font-bold my-3">Site Name:</h2>
+      <p>{siteName}</p>
+
+      <h2 className="text-md font-bold my-3">Description:</h2>
+      <p className="break-all">{description}</p>
+
+      <h2 className="text-md font-bold my-3">Created At:</h2>
+      <p>{createdAt?.split('T')[0]}</p>
+
+      <h2 className="text-md font-bold my-3">Status:</h2>
+      <p className="capitalize">{status}</p>
+
+      <h2 className="text-md font-bold my-3">Bid Amount:</h2>
+      <p>{cost || 'NA'}</p>
+
+      <h2 className="text-md font-bold my-3">Contractor:</h2>
+      <p>{contractor || 'NA'}</p>
     </>
   );
 };

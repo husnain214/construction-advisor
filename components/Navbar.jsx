@@ -88,12 +88,12 @@ const Navbar = ({ navVisible, setNavVisible }) => {
 
   return (
     <div
-      className={`col-start-1 sm:col-start-auto col-end-1 sm:col-end-auto row-start-1 sm:row-start-auto row-end-1 sm:row-end-auto z-20 sm:translate-x-0 ${
+      className={`col-start-1 md:col-start-auto col-end-1 md:col-end-auto row-start-1 md:row-start-auto row-end-1 md:row-end-auto z-20 md:translate-x-0 ${
         navVisible ? '' : '-translate-x-full'
       } bg-gray-100 grid content-start grid-rows-[auto_1fr] pl-10 pr-10 py-10 sticky top-0 max-h-screen transition-all duration-500`}
     >
       <button
-        className="absolute z-10 right-5 top-5 block sm:hidden"
+        className="absolute z-10 right-5 top-5 block md:hidden"
         onClick={() => setNavVisible(false)}
       >
         <CrossIcon className={'w-10'} />

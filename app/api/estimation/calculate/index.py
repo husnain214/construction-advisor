@@ -55,7 +55,7 @@ def predict_house_price(type, location, area, baths, bedrooms):
 
 
 
-@app.route('/api/estimation', methods=['POST'])
+@app.route('/api/estimation/calculate', methods=['POST'])
 def estimation():
     try:
         data = request.get_json()
@@ -64,6 +64,8 @@ def estimation():
         area = data['area']
         baths = data['bathrooms']
         bedrooms = data['bedrooms']
+
+        print(data)
 
         predicted_price = predict_house_price(type, location, area, baths, bedrooms)
 

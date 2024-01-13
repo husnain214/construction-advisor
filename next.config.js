@@ -2,8 +2,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/api/estimation',
-        destination: 'http://127.0.0.1:5328/api/estimation',
+        source: '/api/estimation/calculate',
+        destination: 'http://127.0.0.1:5328/api/estimation/calculate',
       },
     ];
   },
