@@ -28,16 +28,21 @@ export const middleware = async (request) => {
   const notContractor =
     (role === 'customer' || role === 'admin') &&
     path.startsWith('/users/contractor');
+
   const notCustomer =
     (role === 'contractor' || role === 'admin') &&
     path.startsWith('/users/customer');
 
+  const notAdmin =
+    (role === 'contractor' || role === 'customer') && path.startsWith('/admin');
+
   const redirUrls = {
-    user: `/users/${role}`,
+    customer: '/users/customer',
+    contractor: '/users/contractor',
     admin: '/admin',
   };
 
-  if ((isPublicPath && token) || notContractor || notCustomer) {
+  if ((isPublicPath && token) || notContractor || notCustomer || notAdmin) {
     return NextResponse.redirect(new URL(redirUrls[role], request.nextUrl));
   }
 
@@ -47,5 +52,5 @@ export const middleware = async (request) => {
 };
 
 export const config = {
-  matcher: ['/users', '/users/:path*', '/', '/signup', '/api/:path*'],
+  matcher: ['/admin', '/users', '/users/:path*', '/', '/signup', '/api/:path*'],
 };

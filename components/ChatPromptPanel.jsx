@@ -17,9 +17,9 @@ const ChatPromptPanel = ({ activeContact }) => {
       createdAt: new Date().toJSON(),
     };
 
-    await chatService.createMessage(message);
-
     setNewMessage('');
+
+    await chatService.createMessage(message);
   };
 
   return (
@@ -29,10 +29,8 @@ const ChatPromptPanel = ({ activeContact }) => {
       onSubmit={handleSubmit}
       className="h-auto min-h-[84px] p-5 flex items-center"
     >
-      <textarea
+      <input
         className="grow md:mr-5 xs:mr-4 self-end px-5 py-3 rounded-sm content-center outline-none text-sm placeholder:text-black placeholder:opacity-40 text-opacity-70 focus:outline-none transition duration-200 ease-out text-black bg-primary bg-opacity-20 border-opacity-0 max-h-[80px] pr-[50px] resize-none scrollbar-hidden"
-        cols={30}
-        rows={1}
         placeholder="Write your message here"
         aria-label="Write your message here"
         value={newMessage}

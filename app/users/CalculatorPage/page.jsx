@@ -103,7 +103,8 @@ const CalculatorPage = () => {
           <label className="font-bold tracking-wider" htmlFor="">
             Bedrooms:
             <input
-              type="number"
+              type="text"
+              required
               name="bedrooms"
               className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500"
             />
@@ -111,7 +112,8 @@ const CalculatorPage = () => {
           <label className="font-bold tracking-wider" htmlFor="">
             Bathrooms:
             <input
-              type="number"
+              type="text"
+              required
               name="bathrooms"
               className="py-2 px-3 pr-11 block w-full border border-gray-200 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500"
             />

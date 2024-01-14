@@ -11,9 +11,16 @@ const ChatAside = ({
 }) => {
   const [filter, setFilter] = useState('');
   const contacts = useSelector((state) => state.contacts);
-  const filteredContacts = filter
-    ? contacts.filter((contact) => contact.name.includes(filter))
-    : contacts;
+
+  let filteredContacts;
+
+  if (filter) {
+    filteredContacts = contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+  } else {
+    filteredContacts = contacts;
+  }
 
   return (
     <aside

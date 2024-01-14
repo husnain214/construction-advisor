@@ -18,7 +18,6 @@ import {
 } from '@/public';
 
 const Navbar = ({ navVisible, setNavVisible }) => {
-  const loggedUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user);
@@ -27,7 +26,7 @@ const Navbar = ({ navVisible, setNavVisible }) => {
   const userLinks = [
     {
       name: 'General',
-      href: `/users/${loggedUser.role}`,
+      href: `/users/${user.role}`,
       Icon: HomeIcon,
     },
     {
@@ -47,7 +46,7 @@ const Navbar = ({ navVisible, setNavVisible }) => {
     },
     {
       name: 'Jobs',
-      href: `/users/${loggedUser.role}/JobPosts`,
+      href: `/users/${user.role}/JobPosts`,
       Icon: BriefcaseIcon,
     },
   ];
@@ -102,14 +101,14 @@ const Navbar = ({ navVisible, setNavVisible }) => {
       <header className="grid grid-cols-[auto_1fr] items-center gap-x-4">
         <Image
           className="rounded-[17px] aspect-square object-cover"
-          src={loggedUser.picture}
-          alt={`${loggedUser.name}'s picture`}
+          src={user.picture}
+          alt={`${user.name}'s picture`}
           width={55}
           height={55}
           priority={true}
         />
 
-        <span className="font-bold text-lg">{loggedUser.name}</span>
+        <span className="font-bold text-lg">{user.name}</span>
       </header>
 
       <nav className="grid mt-10 font-[500]">
