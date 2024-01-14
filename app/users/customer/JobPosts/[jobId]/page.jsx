@@ -54,18 +54,20 @@ const JobPage = ({ params }) => {
     <div>
       <BackButton />
 
-      <div className="flex justify-between my-5">
-        <Button style={'bg-red-500'} loading={deleting} onClick={omitJob}>
-          Delete
-        </Button>
+      {status !== 'ongoing' && (
+        <div className="flex justify-between my-5">
+          <Button style={'bg-red-500'} loading={deleting} onClick={omitJob}>
+            Delete
+          </Button>
 
-        <Link
-          href={`/users/customer/JobPosts/${id}/update`}
-          className="px-14 py-3 rounded-full bg-primary text-white"
-        >
-          Update
-        </Link>
-      </div>
+          <Link
+            href={`/users/customer/JobPosts/${id}/update`}
+            className="px-14 py-3 rounded-full bg-primary text-white"
+          >
+            Update
+          </Link>
+        </div>
+      )}
 
       <h1 className="text-3xl font-bold my-5 text-center">Job Details</h1>
 
