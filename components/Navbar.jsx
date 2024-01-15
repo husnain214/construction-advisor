@@ -15,6 +15,7 @@ import {
   DollarIcon,
   MultipleUserIcon,
   CrossIcon,
+  SearchIcon,
 } from '@/public';
 
 const Navbar = ({ navVisible, setNavVisible }) => {
@@ -48,6 +49,11 @@ const Navbar = ({ navVisible, setNavVisible }) => {
       name: 'Jobs',
       href: `/users/${user.role}/JobPosts`,
       Icon: BriefcaseIcon,
+    },
+    {
+      name: 'Search Vendors',
+      href: '/users/VendorsPage',
+      Icon: SearchIcon,
     },
   ];
 
