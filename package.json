@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "flask-dev": "pip install -r requirements.txt && python -m flask --app app/api/estimation/calculate/index run -p 5328",
+    "flask-dev": "pip install -r requirements.txt && python -m flask --app app/api/index run -p 5328",
     "next-dev": "next dev",
     "dev": "concurrently \"npm run next-dev\" \"npm run flask-dev\"",
     "migrate": "prisma migrate dev --name init",
