@@ -9,10 +9,11 @@ export const GET = async () => {
     Area: new Set(),
   };
 
-  // Wrap fs.createReadStream in a promise
   const readFilePromise = () =>
     new Promise((resolve, reject) => {
-      const stream = fs.createReadStream(process.cwd() + '/public/dataset.csv');
+      const stream = fs.createReadStream(
+        process.cwd() + '/app/api/dataset.csv',
+      );
       stream
         .pipe(csv())
         .on('data', (row) => {

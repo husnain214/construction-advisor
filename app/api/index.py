@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 script_dir = os.path.dirname(__file__)  
 file_path = os.path.join(script_dir, 'dataset.csv')
+print(file_path)
 df = pd.read_csv(file_path)
 
 X = df.drop('Price', axis=1)
