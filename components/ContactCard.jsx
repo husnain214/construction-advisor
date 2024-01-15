@@ -12,9 +12,10 @@ const ContactCard = ({ contact, onClick, isActive }) => {
     (message) => message.senderId === id,
   );
 
-  const { text, createdAt } = [...receivedMessages, ...sentMessages]
-    .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-    .at(-1);
+  const { text, createdAt } =
+    [...receivedMessages, ...sentMessages]
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      .at(-1) || {};
   return (
     <>
       <button
@@ -43,9 +44,11 @@ const ContactCard = ({ contact, onClick, isActive }) => {
                   {name}
                 </p>
               </div>
-              <p className="outline-none text-xs text-black font-light leading-4 tracking-[0.16px] uppercase">
-                {helpers.formatTime(createdAt)}
-              </p>
+              {createdAt && (
+                <p className="outline-none text-xs text-black font-light leading-4 tracking-[0.16px] uppercase">
+                  {helpers.formatTime(createdAt)}
+                </p>
+              )}
             </div>
           </div>
           <div className="flex justify-between">

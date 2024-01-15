@@ -40,7 +40,7 @@ const ChatAside = ({
           Messages
         </p>
 
-        <div className="mx-5 xs:mb-6 md:mb-5 flex justify-between items-center rounded-sm bg-primary bg-opacity-10 focus-within:outline-none focus-within:ring focus-within:ring-primary focus-within:ring-opacity-20 focus-within:bg-white duration-200 transition ease-out">
+        <div className="mx-5 mb-5 flex justify-between items-center rounded-sm bg-primary bg-opacity-10 focus-within:outline-none focus-within:ring focus-within:ring-primary focus-within:ring-opacity-20 focus-within:bg-white duration-200 transition ease-out">
           <SearchIcon
             height={16}
             width={16}

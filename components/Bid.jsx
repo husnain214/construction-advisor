@@ -4,10 +4,13 @@ import bidService from '@/services/bidService';
 import { useDispatch, useSelector } from 'react-redux';
 import { activateJob, initializeJobs } from '@/redux/reducers/jobReducer';
 import { acceptBid, initializeBids } from '@/redux/reducers/bidReducer';
-import { newContact } from '@/redux/reducers/userReducer';
+import { getUser, newContact } from '@/redux/reducers/userReducer';
+import { useRouter } from 'next/navigation';
 
 const Bid = ({ bid }) => {
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
+  const [creating, setCreating] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const inContacts = user.contacts.find(
@@ -29,19 +32,23 @@ const Bid = ({ bid }) => {
     setSubmitting(false);
   };
 
-  const createChat = () => {
+  const createChat = async () => {
+    setCreating(true);
     try {
-      dispatch(newContact({ id: bid.contractorId }));
+      await dispatch(newContact({ id: bid.contractorId }));
+      await dispatch(getUser());
+      router.push('/users/ChatPage');
     } catch (error) {
       console.error(error);
     }
+    setCreating(false);
   };
 
   return (
     <li className="flex rounded-full gap-10 justify-center items-center bg-primary bg-opacity-20 py-5 px-7">
       <h3 className="font-bold text-xl">${bid.amount}</h3>
       {!inContacts && (
-        <Button loading={false} onClick={createChat}>
+        <Button loading={creating} onClick={createChat}>
           Add to contacts
         </Button>
       )}
