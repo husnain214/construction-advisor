@@ -1,6 +1,7 @@
 'use client';
 
 import { ChatAside, ChatWindow } from '@/components';
+import helpers from '@/helpers';
 import { initializeContacts } from '@/redux/reducers/contactReducer';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,19 +14,9 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const sentMessages = user.sentMessages.filter(
-      (message) => message.receiverId === activeContact?.id,
-    );
+    const sortedMessages = helpers.sortMessages(user, activeContact);
 
-    const receivedMessages = user.receivedMessages.filter(
-      (message) => message.senderId === activeContact?.id,
-    );
-
-    const allMessages = [...receivedMessages, ...sentMessages].sort(
-      (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
-    );
-
-    setMessages(allMessages);
+    setMessages(sortedMessages);
   }, [user, activeContact]);
 
   useEffect(() => {

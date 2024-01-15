@@ -15,7 +15,6 @@ const Layout = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [navVisible, setNavVisible] = useState(false);
-
   const [bids, setBids] = useState([]);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -28,22 +27,14 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await userService.getAll();
-      setUsers(data);
-    })();
-  }, []);
+      const users = await userService.getAll();
+      setUsers(users);
 
-  useEffect(() => {
-    (async () => {
-      const data = await jobService.getAll();
-      setJobs(data);
-    })();
-  }, []);
+      const jobs = await jobService.getAll();
+      setJobs(jobs);
 
-  useEffect(() => {
-    (async () => {
-      const data = await bidService.getAll();
-      setBids(data);
+      const bids = await bidService.getAll();
+      setBids(bids);
     })();
   }, []);
 

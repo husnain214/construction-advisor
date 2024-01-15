@@ -76,7 +76,7 @@ const LoginPage = () => {
               </span>
             )}
           </div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password:</label>
           <div className="grid gap-1">
             <input
               type="password"

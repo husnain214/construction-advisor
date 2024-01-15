@@ -44,6 +44,22 @@ const sortMeasurements = (a, b) => {
   return aValue - bValue;
 };
 
-const helpers = { getTokenData, formatTime, sortMeasurements };
+const sortMessages = (user, activeContact) => {
+  const sentMessages = user.sentMessages.filter(
+    (message) => message.receiverId === activeContact?.id,
+  );
+
+  const receivedMessages = user.receivedMessages.filter(
+    (message) => message.senderId === activeContact?.id,
+  );
+
+  const allMessages = [...receivedMessages, ...sentMessages].sort(
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  );
+
+  return allMessages;
+};
+
+const helpers = { getTokenData, formatTime, sortMeasurements, sortMessages };
 
 export default helpers;

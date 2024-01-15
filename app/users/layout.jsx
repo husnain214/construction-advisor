@@ -22,6 +22,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     if (!user) return;
+
     (async () => {
       if (user.role === 'customer') {
         dispatch(initializeJobs());
