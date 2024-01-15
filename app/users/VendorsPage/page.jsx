@@ -72,7 +72,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
       const { lat, lng } = await getLatLng(results[0]);
       setSelected({ lat, lng });
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 

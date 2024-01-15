@@ -46,7 +46,6 @@ const UpdateUserForm = ({ params }) => {
   });
 
   const submit = async (data) => {
-    console.log('update');
     setSubmitting(true);
 
     let pictureUrl = '';

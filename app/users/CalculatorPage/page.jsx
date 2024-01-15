@@ -48,8 +48,6 @@ const CalculatorPage = () => {
     data.bedrooms = parseInt(data.bedrooms);
     data.bathrooms = parseInt(data.bathrooms);
 
-    console.log(data);
-
     const { price } = await calculatorService.getEstimation(data);
 
     const pkr = new Intl.NumberFormat('ur-PK', {

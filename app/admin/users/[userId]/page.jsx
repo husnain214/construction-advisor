@@ -10,7 +10,7 @@ const UserPage = ({ params }) => {
   const { userId } = params;
   const { users } = useContext(UsersContext);
   const user = users.filter((user) => user.id === userId)[0];
-  console.log(user);
+
   return (
     <>
       <BackButton />

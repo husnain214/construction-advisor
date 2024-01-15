@@ -16,18 +16,18 @@ import { Button } from '@/components';
 
 const schema = z
   .object({
-    profileAvatar: z.custom().refine((data) => data.length > 0, {
+    picture: z.custom().refine((data) => data.length > 0, {
       message: 'Profile picture is required',
     }),
-    fullname: z.string().min(1).max(30),
+    name: z.string().min(1).max(30),
     email: z.string().min(12).max(20).email(),
     password: z.string().min(5).max(20),
     confirmPassword: z.string().min(5).max(20),
-    phoneNumber: z.string().min(7).max(13),
-    cnicNumber: z.string().min(13).max(13),
+    phone: z.string().min(7).max(13),
+    cnic: z.string().min(13).max(13),
     gender: z.string(),
     role: z.string(),
-    dateOfBirth: z.coerce.date().max(new Date()),
+    dob: z.coerce.date().max(new Date()),
     age: z.preprocess(
       (arg) => parseInt(z.string().parse(arg)),
       z.number().nonnegative().min(18).max(100),
@@ -55,33 +55,28 @@ const SignupForm = () => {
 
   const submit = async (data) => {
     setSubmitting(true);
-    const formData = new FormData();
-    formData.append('file', data.profileAvatar[0]);
-    formData.append('upload_preset', 'ml_default');
-    const { data: picture } = await axios.post(
-      'https://api.cloudinary.com/v1_1/dyo9kvck4/image/upload',
-      formData,
-    );
-    const userData = {
-      email: data.email,
-      password: data.password,
-      name: data.fullname,
-      age: data.age,
-      gender: data.gender,
-      dob: data.dateOfBirth,
-      cnic: data.cnicNumber,
-      phone: data.phoneNumber,
-      picture: picture.url,
-      role: data.role,
-    };
+
     try {
-      await dispatch(addUser(userData));
+      const formData = new FormData();
+      formData.append('file', data.picture[0]);
+      formData.append('upload_preset', 'ml_default');
+
+      const {
+        data: { url },
+      } = await axios.post(process.env.NEXT_PUBLIC_CLOUDINARY_URL, formData);
+
+      delete data.confirmPassword;
+
+      data.picture = url;
+
+      await dispatch(addUser(data));
       router.push('/users');
     } catch (error) {
       console.error(error);
       setSignupError('signup failed!');
       setTimeout(() => setSignupError(''), 5000);
     }
+
     setSubmitting(false);
   };
 
@@ -97,6 +92,7 @@ const SignupForm = () => {
 
           <form
             onSubmit={handleSubmit(submit)}
+            method="POST"
             action=""
             className="sm:grid sm:grid-cols-12 gap-2 sm:gap-6"
           >
@@ -117,7 +113,7 @@ const SignupForm = () => {
                 <UploadIcon className="text-primary" />
                 Upload photo
                 <input
-                  {...register('profileAvatar', {
+                  {...register('picture', {
                     required: 'Profile picture is required',
                     onChange: ({ target }) =>
                       setAvatar(
@@ -132,9 +128,9 @@ const SignupForm = () => {
                 />
               </label>
 
-              {errors.profileAvatar && (
+              {errors.picture && (
                 <span role="alert" className="text-red-500 text-sm">
-                  {errors.profileAvatar.message}
+                  {errors.picture.message}
                 </span>
               )}
             </div>
@@ -220,7 +216,7 @@ const SignupForm = () => {
             </div>
 
             <label
-              htmlFor="dateOfBirth"
+              htmlFor="dob"
               className="col-span-3 inline-block text-sm text-gray-800 mt-2.5 mb-2 sm:mb-0"
             >
               Date of Birth
@@ -228,14 +224,14 @@ const SignupForm = () => {
 
             <div className="sm:col-span-9">
               <input
-                {...register('dateOfBirth')}
+                {...register('dob')}
                 type="date"
                 className="py-2 px-3 pr-11 block w-full border border-gray-200 text-gray-500 shadow-sm -mt-px -ml-px sm:mt-0 sm:first:ml-0 rounded-md text-sm uppercase tracking-widest"
               />
 
-              {errors.dateOfBirth && (
+              {errors.dob && (
                 <span role="alert" className="text-red-500 text-sm">
-                  {errors.dateOfBirth.message}
+                  {errors.dob.message}
                 </span>
               )}
             </div>

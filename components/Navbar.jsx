@@ -87,7 +87,7 @@ const Navbar = ({ navVisible, setNavVisible }) => {
       await dispatch(logout());
       router.push('/');
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 

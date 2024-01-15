@@ -21,7 +21,6 @@ export const POST = async (request) => {
 
     return NextResponse.json(createdMessage);
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 400 });
   } finally {
     await prisma.$disconnect();

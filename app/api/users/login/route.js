@@ -7,8 +7,6 @@ import { createSecretKey } from 'crypto';
 export async function POST(request) {
   const credentials = await request.json();
 
-  console.log(credentials);
-
   const user = await prisma.user.findFirst({
     where: {
       email: credentials.email,

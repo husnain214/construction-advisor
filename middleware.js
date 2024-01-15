@@ -20,7 +20,6 @@ export const middleware = async (request) => {
         },
       });
     } catch (error) {
-      console.error(error);
       return NextResponse.next();
     }
   }
