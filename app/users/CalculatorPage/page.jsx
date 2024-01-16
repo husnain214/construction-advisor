@@ -56,7 +56,7 @@ const CalculatorPage = () => {
     });
 
     const roundedPrice = Math.ceil(price);
-    const formattedPrice = pkr.format(roundedPrice);
+    const formattedPrice = pkr.format(Math.abs(roundedPrice));
 
     setPrice(formattedPrice);
   };
