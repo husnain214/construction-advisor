@@ -51,6 +51,11 @@ const Navbar = ({ navVisible, setNavVisible }) => {
       Icon: BriefcaseIcon,
     },
     {
+      name: 'Shahid',
+      href: `/users/${user.role}/JobPosts`,
+      Icon: BriefcaseIcon,
+    },
+    {
       name: 'Search Vendors',
       href: '/users/VendorsPage',
       Icon: SearchIcon,

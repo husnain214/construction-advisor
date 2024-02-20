@@ -50,6 +50,7 @@ function Map() {
       >
         {selected && <Marker position={selected} />}
       </GoogleMap>
+      <h1>Shahid</h1>
     </>
   );
 }
